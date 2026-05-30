@@ -1,11 +1,100 @@
-import React from 'react'
+"use client"
+
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Button } from "@/components/ui/button"
+import {
+  Form
+} from "@/components/ui/form"
+import CustomFormField from "../shared/CustomFormField"
+import SubmitButton from "../shared/SubmitButton"
+import { useState } from "react"
+
+
+
+export enum FormFieldType {
+  INPUT = "input",
+  CHECKBOX = "checkbox",
+  TEXTAREA = "textarea",
+  PHONE_INPUT = "phoneInput",
+  DATE_PICKER = "datePicker",
+  SELECT = "select",
+  SKELETON = "skeleton"
+}
+
 
 const PatientForm = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+
+
+  const form = useForm<z.infer<typeof UserformSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+    }
+  })
+
+
+  function onSubmit(values: z.infer<typeof formSchema>){
+
+    console.log(values);
+
+  }
+
+
   return (
-    <div>
-      
-    </div>
+    <>
+    <Form {...form}>
+
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
+
+        <section className="mb-12 space-y-4">
+          <h1 className="header">Hi there 👋</h1>
+          <p className="text-dark-700">Schedule your first appointment.</p>
+        </section>
+
+        <CustomFormField
+        control={form.control}
+        fieldType={FormFieldType.INPUT}
+        name="name"
+        label="Full name"
+        placeholder="Full name..."
+        iconSrc="/assets/icons/user.svg"
+        iconAlt="user"/>
+
+        <CustomFormField
+        control={form.control}
+        fieldType={FormFieldType.INPUT}
+        name="email"
+        label="Email Address"
+        placeholder="Email address ..."
+        iconSrc="/assets/icons/email.svg"
+        iconAlt="email"/>
+
+
+        <CustomFormField
+        control={form.control}
+        fieldType={FormFieldType.PHONE_INPUT}
+        name="phone"
+        label="Phone Number"
+        placeholder="(5555) 123-4567"
+        />
+
+
+
+
+        <SubmitButton isLoading={isLoading}>
+          Get Started
+        </SubmitButton>
+
+
+      </form>
+    </Form>
+    </>
   )
 }
 
 export default PatientForm
+
