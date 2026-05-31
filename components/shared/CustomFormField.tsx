@@ -6,6 +6,7 @@ import { Input } from '../ui/Input'
 import Image from 'next/image'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { E164Number } from "libphonenumber-js/core";
 
 
 interface CustomProps {
@@ -74,8 +75,9 @@ const RenderField  = ({ field, props } : { field: any; props: CustomProps  }) =>
 
         </FormControl>
       )
+      
     default:
-            break;
+          break;
   }
 } 
 
