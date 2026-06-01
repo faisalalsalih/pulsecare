@@ -1,18 +1,22 @@
 import React from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { Control } from 'react-hook-form'
+import { Control, Path } from 'react-hook-form'
 import { FormFieldType } from '../forms/PatientForm'
 import { Input } from '../ui/Input'
 import Image from 'next/image'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { E164Number } from "libphonenumber-js/core";
+import { UserFormValidation } from '@/lib/validation'
+import { z } from 'zod'
 
 
-interface CustomProps {
-  control: Control<any>,
+type UserFormValues = z.infer<typeof UserFormValidation>;
+
+interface CustomProps<T extends UserFormValues> {
+  control: Control<T>,
   fieldType: FormFieldType,
-  name: string,
+  name: Path<T>,
   label?: string,
   placeholder?: string,
   iconSrc?: string,
@@ -26,7 +30,7 @@ interface CustomProps {
 
 
 
-const RenderField  = ({ field, props } : { field: any; props: CustomProps  }) => {
+const RenderField  = <T extends UserFormValues>({ field, props } : { field: any; props: CustomProps<T>  }) => {
 
   const { fieldType, iconSrc, iconAlt, placeholder } = props;
 
@@ -81,7 +85,7 @@ const RenderField  = ({ field, props } : { field: any; props: CustomProps  }) =>
   }
 } 
 
-const CustomFormField = (props : CustomProps) => {
+const CustomFormField = <T extends UserFormValues>(props: CustomProps<T>) => {
 
   const { control, fieldType, name, label } = props;
 
