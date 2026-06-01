@@ -1,5 +1,6 @@
 "use client"
 
+
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -27,7 +28,7 @@ export enum FormFieldType {
 }
 
 
-const PatientForm = () => {
+const RegisterForm = ({ user } : { user: User }) => {
 
   const router = useRouter();
 
@@ -89,26 +90,6 @@ const PatientForm = () => {
         iconSrc="/assets/icons/user.svg"
         iconAlt="user"/>
 
-        <CustomFormField
-        control={form.control}
-        fieldType={FormFieldType.INPUT}
-        name="email"
-        label="Email Address"
-        placeholder="Email address ..."
-        iconSrc="/assets/icons/email.svg"
-        iconAlt="email"/>
-
-
-        <CustomFormField
-        control={form.control}
-        fieldType={FormFieldType.PHONE_INPUT}
-        name="phone"
-        label="Phone Number"
-        placeholder="(5555) 123-4567"
-        />
-
-
-
 
         <SubmitButton isLoading={isLoading}>
           Get Started
@@ -121,5 +102,5 @@ const PatientForm = () => {
   )
 }
 
-export default PatientForm
+export default RegisterForm
 
