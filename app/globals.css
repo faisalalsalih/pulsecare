@@ -307,6 +307,12 @@
   stroke: #1a1d21 !important;
 }
 
+
+.react-datepicker__day-name:hover,
+.react-datepicker__day:hover{
+  background-color: #363a3d !important;
+}
+
 .react-datepicker__time-list-item:hover {
   background-color: #363a3d !important;
 }

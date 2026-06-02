@@ -1,22 +1,23 @@
 import React from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { Control, Path } from 'react-hook-form'
+import { Control } from 'react-hook-form'
 import { FormFieldType } from '../forms/PatientForm'
 import { Input } from '../ui/Input'
 import Image from 'next/image'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { E164Number } from "libphonenumber-js/core";
-import { UserFormValidation } from '@/lib/validation'
-import { z } from 'zod'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
-type UserFormValues = z.infer<typeof UserFormValidation>;
 
-interface CustomProps<T extends UserFormValues> {
-  control: Control<T>,
+
+
+interface CustomProps {
+  control: Control<any>,
   fieldType: FormFieldType,
-  name: Path<T>,
+  name: string,
   label?: string,
   placeholder?: string,
   iconSrc?: string,
@@ -30,62 +31,85 @@ interface CustomProps<T extends UserFormValues> {
 
 
 
-const RenderField  = <T extends UserFormValues>({ field, props } : { field: any; props: CustomProps<T>  }) => {
+const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 
   const { fieldType, iconSrc, iconAlt, placeholder } = props;
 
 
-  switch (fieldType){
+  switch (fieldType) {
 
-    case FormFieldType.INPUT: 
-    return (
-      <div className="flex rounded-md border border-dark-500 bg-dark-400">
-        {
-          iconSrc && (
-            <Image
-            src={iconSrc}
-            alt={iconAlt || "icon"}
-            height={24}
-            width={24}
-            className="ml-2"
-            />
-          )
-        }
+    case FormFieldType.INPUT:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          {
+            iconSrc && (
+              <Image
+                src={iconSrc}
+                alt={iconAlt || "icon"}
+                height={24}
+                width={24}
+                className="ml-2"
+              />
+            )
+          }
 
-        <FormControl>
+          <FormControl>
 
-          <Input
-          placeholder={placeholder}
-          {...field}
-          className="shad-input border-0" />
+            <Input
+              placeholder={placeholder}
+              {...field}
+              className="shad-input border-0" />
 
-        </FormControl>
+          </FormControl>
 
-      </div>
-    )
+        </div>
+      )
 
     case FormFieldType.PHONE_INPUT:
       return (
         <FormControl>
 
           <PhoneInput defaultCountry="US"
-          placeholder={placeholder}
-          international
-          withCountryCallingCode
-          value={field.value as E164Number | undefined}
-          onChange={field.onChange}
-          className="input-phone"
+            placeholder={placeholder}
+            international
+            withCountryCallingCode
+            value={field.value as E164Number | undefined}
+            onChange={field.onChange}
+            className="input-phone"
           />
 
         </FormControl>
       )
-      
-    default:
-          break;
-  }
-} 
 
-const CustomFormField = <T extends UserFormValues>(props: CustomProps<T>) => {
+    case FormFieldType.DATE_PICKER:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+
+          <Image
+            src="/assets/icons/calendar.svg"
+            height={24}
+            width={24}
+            alt="calendar"
+            className="ml-2"
+          />
+
+          <FormControl>
+
+            <DatePicker
+            selected={field.value}
+            onChange={(date) => field.onChange(date)} />
+
+          </FormControl>
+
+        </div>
+      )
+
+    default:
+      break;
+  }
+}
+
+const CustomFormField = (props: CustomProps) => {
 
   const { control, fieldType, name, label } = props;
 
@@ -93,25 +117,28 @@ const CustomFormField = <T extends UserFormValues>(props: CustomProps<T>) => {
   return (
     <>
       <FormField
-      control={control}
-      name={name}
-      render={({ field }) => (
-        <FormItem className="flex-1">
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <FormItem className="flex-1">
 
-          {fieldType !== FormFieldType.CHECKBOX && label && (
-            <FormLabel>{label}</FormLabel>
-          )}
+            {fieldType !== FormFieldType.CHECKBOX && label && (
+              <FormLabel>{label}</FormLabel>
+            )}
 
-          <RenderField field={field} props={props} />
+            <RenderField field={field} props={props} />
 
-          <FormMessage className="shad-error"/>
+            <FormMessage className="shad-error" />
 
 
-        </FormItem>
-      )} />
-      
+          </FormItem>
+        )} />
+
     </>
   )
 }
 
 export default CustomFormField
+
+
+
