@@ -15,7 +15,7 @@ import { UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.actions"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { Gender } from "@/contants"
+import { GenderOptions } from "@/contants"
 import { Label } from "../ui/label"
 
 
@@ -129,6 +129,8 @@ const RegisterForm = ({ user } : { user: User }) => {
 
       <div className="flex flex-col gap-6 xl:flex-row">
 
+
+        {/* DatePicker for Date of Birth */}
         <CustomFormField
         control={form.control}
         fieldType={FormFieldType.DATE_PICKER}
@@ -136,7 +138,7 @@ const RegisterForm = ({ user } : { user: User }) => {
         label="Date of Birth"
         placeholder="DOB ..."/>
 
-
+        {/* Radio Group  */}
         <CustomFormField
         control={form.control}
         fieldType={FormFieldType.SKELETON}
@@ -148,16 +150,16 @@ const RegisterForm = ({ user } : { user: User }) => {
             <RadioGroup className="flex h-11 gap-6 xl:justify-between"
             onValueChange={field.onChange} defaultValue={field.value}>
               {
-                Gender.map((option) => (
+                GenderOptions.map((option) => (
                   <div key={option} className="radio-group">
 
-                    <RadioGroupItem value={option} id={option}>
+                    <RadioGroupItem value={option} id={option} />
 
                       <Label htmlFor={option} className="cursor-pointer">
                         {option}
                       </Label>
                       
-                    </RadioGroupItem>
+                    
                   </div>
                 ))
               }
