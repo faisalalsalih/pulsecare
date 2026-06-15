@@ -18,7 +18,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
 import { GenderOptions } from "@/contants"
 import { Label } from "../ui/label"
 import { Doctors } from "@/contants"
-import { SelectItem } from "@radix-ui/react-select"
+import { SelectItem } from "@/components/ui/select"
 import Image from "next/image"
 
 
@@ -231,29 +231,24 @@ const RegisterForm = ({ user }: { user: User }) => {
 
 
           <CustomFormField
-            control={form.control}
             fieldType={FormFieldType.SELECT}
+            control={form.control}
             name="primaryPhysician"
-            label="Primary Physician"
-            placeholder="Select Your Physician"
+            label="Primary care physician"
+            placeholder="Select a physician"
           >
-            {Doctors.map((doctor) => (
-
-              <SelectItem key={doctor.name} value={doctor.name}>
-
-                <div className="flex items-center cursor-pointer gap-2">
-
+            {Doctors.map((doctor, i) => (
+              <SelectItem key={doctor.name + i} value={doctor.name}>
+                <div className="flex cursor-pointer items-center gap-2">
                   <Image
-                  src={doctor.image}
-                  width={32}
-                  height={32}
-                  alt={doctor.name}
-                  className="rounded-full border border-dark-500" />
-
+                    src={doctor.image}
+                    width={32}
+                    height={32}
+                    alt="doctor"
+                    className="rounded-full border border-dark-500"
+                  />
                   <p>{doctor.name}</p>
-
                 </div>
-
               </SelectItem>
             ))}
           </CustomFormField>
