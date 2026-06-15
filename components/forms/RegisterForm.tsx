@@ -235,7 +235,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.SELECT}
             name="primaryPhysician"
             label="Primary Physician"
-            placeholder="Select a physician"
+            placeholder="Select Your Physician"
           >
             {Doctors.map((doctor) => (
 
@@ -251,7 +251,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                   className="rounded-full border border-dark-500" />
 
                   <p>{doctor.name}</p>
-                  
+
                 </div>
 
               </SelectItem>
