@@ -15,7 +15,7 @@ import { UserFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.actions"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { GenderOptions } from "@/contants"
+import { GenderOptions,  IdentificationTypes } from "@/contants"
 import { Label } from "../ui/label"
 import { Doctors } from "@/contants"
 import { SelectItem } from "@/components/ui/select"
@@ -327,12 +327,19 @@ const RegisterForm = ({ user }: { user: User }) => {
 
 
 
-          
-
-
-
-
-
+          <CustomFormField
+            fieldType={FormFieldType.SELECT}
+            control={form.control}
+            name="identificationType"
+            label="Identification Type"
+            placeholder="Select an Identification Type"
+          >
+            {IdentificationTypes.map((type) => (
+              <SelectItem key={type} value={type}>
+                {type}
+              </SelectItem>
+            ))}
+          </CustomFormField>
 
 
 
