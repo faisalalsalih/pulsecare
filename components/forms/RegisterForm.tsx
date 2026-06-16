@@ -254,6 +254,88 @@ const RegisterForm = ({ user }: { user: User }) => {
           </CustomFormField>
 
 
+
+          <div className="flex flex-col xl:flex-row gap-6">
+
+            <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="insuranceProvider"
+            label="Insurance Provider"
+            placeholder="Blue Cross Blue Shield" />
+
+            <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="insurancePolicyNumber"
+            label="Insurance Policy Number"
+            placeholder="123456789" />
+
+
+          </div>
+
+
+
+          <div className="flex flex-col xl:flex-row gap-6">
+
+            <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="allergies"
+            label="Allergies (if any)"
+            placeholder="Pencillin, Pollen, Peanuts" />
+
+            <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="currentMedication"
+            label="Current Medication"
+            placeholder="Ibuprofen 200mg, Aspirin 100mg" />
+
+
+          </div>
+
+
+
+          <div className="flex flex-col xl:flex-row gap-6">
+
+            <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="familyMedicalHistory"
+            label="Family Medical History"
+            placeholder="Diabetes, Heart Disease" />
+
+            <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="pastMedicalHistory"
+            label="Past Medical History"
+            placeholder="Broken Arm, OCD" />
+
+
+          </div>
+
+
+          <section className="space-y-6">
+
+            <div className="mb-9 space-y-1">
+              <h2 className="sub-header">Identification and Verification</h2>
+            </div>
+
+          </section>
+
+
+
+          
+
+
+
+
+
+
+
+
           <SubmitButton isLoading={isLoading}>
             Get Started
           </SubmitButton>
