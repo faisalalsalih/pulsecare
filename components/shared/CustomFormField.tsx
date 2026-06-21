@@ -69,19 +69,19 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       )
 
 
-    case FormFieldType.TEXTAREA: 
-    return (
-      <FormControl>
+    case FormFieldType.TEXTAREA:
+      return (
+        <FormControl>
 
-        <Textarea
-        placeholder={placeholder}
-        {...field}
-        className="shad-textArea"
-        disabled={props.disabled} />
+          <Textarea
+            placeholder={placeholder}
+            {...field}
+            className="shad-textArea"
+            disabled={props.disabled} />
 
-      </FormControl>
-    )
-    
+        </FormControl>
+      )
+
 
     case FormFieldType.PHONE_INPUT:
       return (
@@ -120,6 +120,9 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               showTimeSelect={showTimeSelect ?? false}
               timeInputLabel="Time:"
               wrapperClassName="date-picker"
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
             />
 
           </FormControl>
@@ -133,9 +136,9 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <Select onValueChange={field.onChange} defaultValue={field.value}>
 
             {/* <FormControl> */}
-              <SelectTrigger className="shad-select-trigger">
-                <SelectValue placeholder={props.placeholder} />
-              </SelectTrigger>
+            <SelectTrigger className="shad-select-trigger">
+              <SelectValue placeholder={props.placeholder} />
+            </SelectTrigger>
             {/* </FormControl> */}
 
             <SelectContent className="shad-select-content">
@@ -147,31 +150,31 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       );
 
     case FormFieldType.SKELETON:
-      
+
       return renderSkeleton ? renderSkeleton(field) : null
 
 
     case FormFieldType.CHECKBOX:
-      return(
-      <FormControl>
+      return (
+        <FormControl>
 
-        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
 
-          <Checkbox
-          id={props.name}
-          checked={field.value}
-          onCheckedChange={field.onChange}
-          />
-
-
-          <label htmlFor={props.name} className="checkbox-label">
-            {props.label}
-          </label>
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
 
 
-        </div>
+            <label htmlFor={props.name} className="checkbox-label">
+              {props.label}
+            </label>
 
-      </FormControl>
+
+          </div>
+
+        </FormControl>
       )
     default:
       break;
