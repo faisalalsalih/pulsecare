@@ -11,7 +11,7 @@ import {
 import CustomFormField from "../shared/CustomFormField"
 import SubmitButton from "../shared/SubmitButton"
 import { useState } from "react"
-import { UserFormValidation } from "@/lib/validation"
+import { PatientFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { createUser } from "@/lib/actions/patient.actions"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
@@ -20,7 +20,9 @@ import { Label } from "../ui/label"
 import { Doctors } from "@/contants"
 import { SelectItem } from "@/components/ui/select"
 import Image from "next/image"
-
+import { FileUploader } from "../shared/FileUploader"
+import { PatientFormDefaultValues } from "@/contants"
+import { registerPatient } from "@/lib/actions/patient.actions"
 
 
 
@@ -42,9 +44,10 @@ const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const form = useForm<z.infer<typeof UserFormValidation>>({
-    resolver: zodResolver(UserFormValidation),
+  const form = useForm<z.infer<typeof PatientFormValidation>>({
+    resolver: zodResolver(PatientFormValidation),
     defaultValues: {
+      ...PatientFormDefaultValues,
       name: "",
       email: "",
       phone: "",
@@ -52,25 +55,49 @@ const RegisterForm = ({ user }: { user: User }) => {
   })
 
 
-  async function onSubmit({ name, email, phone }: z.infer<typeof UserFormValidation>) {
+  async function onSubmit(values: z.infer<typeof PatientFormValidation>) {
 
     setIsLoading(true);
 
 
+    let formData;
+
+
+    if(values.identificationDocument && values.identificationDocument.length > 0){
+
+      const blobFile = new Blob([values.identificationDocument[0]], {
+        type: values.identificationDocument[0].type,
+      })
+
+
+      formData = new FormData();
+
+      formData.append('blobFile', blobFile);
+      formData.append('fileName', values.identificationDocument[0].name);
+
+    }
+
     try {
 
-      const userData = { name, email, phone };
+      const patientData = {
+        ...values,
+        userId: user.$id,
+        birthDate: new Date(values.birthDate),
+        IdentificationDocument: formData
+      }
 
-      const user = await createUser(userData);
 
-      if (user) router.push(`/patients/${user.$id}/register`)
+      const patient = await registerPatient(patientData);
 
+      if(patient) router.push(`/patients/${user.$id}/new-appointment`);
 
     }
     catch (error) {
       console.log(error);
     }
 
+
+    setIsLoading(false);
 
 
   }
@@ -174,6 +201,8 @@ const RegisterForm = ({ user }: { user: User }) => {
           </div>
 
 
+          {/* Simple Inputs for Address and Occupation */}
+
           <div className="flex items-col gap-6 xl:flex-row">
 
             <CustomFormField
@@ -196,7 +225,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
           </div>
 
-
+          {/* Simple Inputs for Emergency Contact and Phone Input*/}
           <div className="flex flex-col xl:flex-row gap-6">
 
             <CustomFormField
@@ -229,6 +258,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
           </section>
 
+          {/* Select Input for Primary Physician */}
 
           <CustomFormField
             fieldType={FormFieldType.SELECT}
@@ -253,7 +283,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             ))}
           </CustomFormField>
 
-
+          {/* Simple Inputs for Insurance Information */}
 
           <div className="flex flex-col xl:flex-row gap-6">
 
@@ -274,8 +304,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
           </div>
 
-
-
+          {/* Text Areas for Medical Information */}
           <div className="flex flex-col xl:flex-row gap-6">
 
             <CustomFormField
@@ -296,7 +325,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           </div>
 
 
-
+          {/* Text Areas for Medical History */}
           <div className="flex flex-col xl:flex-row gap-6">
 
             <CustomFormField
@@ -326,7 +355,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           </section>
 
 
-
+          {/* Select Input for Identification Type */}
           <CustomFormField
             fieldType={FormFieldType.SELECT}
             control={form.control}
@@ -342,6 +371,60 @@ const RegisterForm = ({ user }: { user: User }) => {
           </CustomFormField>
 
 
+          {/* Simple Input for Identification Number */}
+          <CustomFormField 
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="identificationNumber"
+          label="Identification Number"
+          placeholder="123-45-6789" />
+
+
+          {/* Scanned Copy of Identification Document Having the FileUploader */ }
+          <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.SKELETON}
+              name="identificationDocument"
+              label="Scanned copy of identification document"
+              renderSkeleton={(field) => (
+                <FormControl>
+
+                  <FileUploader files={field.value} onChange={field.onChange}/>
+
+                </FormControl>
+              )}
+          />
+
+
+
+          <section className="space-y-6">
+            <div className="mb-9 space-y-1">
+              <h2 className="sub-header">Consent and Privacy</h2>
+            </div>
+          </section>
+
+
+          <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="treatmentConsent"
+          label="I consent to treatment" />
+
+
+          <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="disclosureConsent"
+          label="I consent to disclosure of information" />
+
+
+          <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="privacyConsent"
+          label="I consent to the privacy policy" />
+
+
 
           <SubmitButton isLoading={isLoading}>
             Get Started
@@ -355,4 +438,5 @@ const RegisterForm = ({ user }: { user: User }) => {
 }
 
 export default RegisterForm
+
 
