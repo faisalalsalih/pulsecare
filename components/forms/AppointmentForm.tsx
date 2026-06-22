@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { SelectItem } from "@/components/ui/select";
-import { Doctors } from "@/contants";
+import { Doctors } from "@/constants";
 import {
   createAppointment,
   updateAppointment,

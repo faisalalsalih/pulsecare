@@ -11,20 +11,15 @@ import { Form, FormControl } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectItem } from "@/components/ui/select";
-import {
-  Doctors,
-  GenderOptions,
-  IdentificationTypes,
-  PatientFormDefaultValues,
-} from "@/constants";
+import { Doctors, PatientFormDefaultValues, IdentificationTypes, GenderOptions } from "@/constants";
 import { registerPatient } from "@/lib/actions/patient.actions";
 import { PatientFormValidation } from "@/lib/validation";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-number-input/style.css";
-import CustomFormField, { FormFieldType } from "../CustomFormField";
-import { FileUploader } from "../FileUploader";
-import SubmitButton from "../SubmitButton";
+import CustomFormField, { FormFieldType } from "../shared/CustomFormField";
+import { FileUploader } from "../shared/FileUploader";
+import SubmitButton from "../shared/SubmitButton";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
