@@ -13,7 +13,6 @@ declare interface CreateUserParams {
   email: string;
   phone: string;
 }
-
 declare interface User extends CreateUserParams {
   $id: string;
 }
@@ -29,13 +28,13 @@ declare interface RegisterUserParams extends CreateUserParams {
   primaryPhysician: string;
   insuranceProvider: string;
   insurancePolicyNumber: string;
-  allergies?: string | undefined;
-  currentMedication?: string | undefined;
-  familyMedicalHistory?: string | undefined;
-  pastMedicalHistory?: string | undefined;
-  identificationType?: string | undefined;
-  identificationNumber?: string | undefined;
-  identificationDocument?: File[] | FormData | undefined;
+  allergies: string | undefined;
+  currentMedication: string | undefined;
+  familyMedicalHistory: string | undefined;
+  pastMedicalHistory: string | undefined;
+  identificationType: string | undefined;
+  identificationNumber: string | undefined;
+  identificationDocument: FormData | undefined;
   privacyConsent: boolean;
 }
 
@@ -56,4 +55,5 @@ declare type UpdateAppointmentParams = {
   appointment: Appointment;
   type: string;
 };
+
 
