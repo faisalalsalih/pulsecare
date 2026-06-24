@@ -36,6 +36,7 @@ export const AppointmentModal = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
+
       <DialogTrigger asChild>
         <Button
           variant="ghost"
@@ -44,7 +45,9 @@ export const AppointmentModal = ({
           {type}
         </Button>
       </DialogTrigger>
+      
       <DialogContent className="shad-dialog sm:max-w-md">
+
         <DialogHeader className="mb-4 space-y-3">
           <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
           <DialogDescription>
@@ -59,6 +62,7 @@ export const AppointmentModal = ({
           appointment={appointment}
           setOpen={setOpen}
         />
+
       </DialogContent>
     </Dialog>
   );

@@ -35,8 +35,10 @@ const RegisterForm = ({ user }: { user: User }) => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
+  const onsubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
+
+    console.log(values);
 
     // Store file info in form data as
     let formData;
@@ -95,7 +97,7 @@ const RegisterForm = ({ user }: { user: User }) => {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onsubmit)}
         className="flex-1 space-y-12"
       >
         <section className="space-y-4">
