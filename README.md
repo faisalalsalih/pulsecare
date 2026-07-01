@@ -1,7 +1,7 @@
 # 🏥 CarePulse
 
-CarePulse is a modern healthcare management system built with **Next.js 14**, **TypeScript**, **TailwindCSS**, **Shadcn UI**, **Radix**, and **MongoDB**.  
-It streamlines patient registration, appointment scheduling, and medical record management while integrating secure authentication and real‑time notifications.
+CarePulse is a modern healthcare management system built with **Next.js 14**, **TypeScript**, **TailwindCSS**, **Shadcn UI**, **Radix**, and **Appwrite**.  
+It streamlines patient registration, appointment scheduling, and medical record management while integrating secure authentication.
 
 ---
 
@@ -33,20 +33,20 @@ It streamlines patient registration, appointment scheduling, and medical record 
 
 ### 1. Patient Registration Form
 ![Patient Registration](public/assets/screenshots/register1.png)
+![Patient Registration](public/assets/screenshots/register2.png)
+![Patient Registration](public/assets/screenshots/register3.png)
 
-### 3. Appointment Scheduling Modal
+### 2. Appointment Scheduling Modal
 ![Appointment Scheduling](public/assets/screenshots/appointment.png)
 
-### 4. Medical Records Dashboard
-![Medical Records](public/assets/screenshots/records.png)
 
-### 5. Admin Panel
+### 3. Admin Panel
 ![Admin Panel](public/assets/screenshots/admin.png)
 
-### 6. Authentication Flow (Login/Signup)
+### 4. Authentication Flow (Login/Signup)
 ![Authentication](public/assets/screenshots/auth.png)
 
-### 7. Real-Time Notifications UI
+### 5. Real-Time Notifications UI
 ![Notifications](public/assets/screenshots/notifications.png)
 
 
