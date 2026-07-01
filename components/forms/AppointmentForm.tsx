@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { SelectItem } from "@/components/ui/select";
 import { Doctors } from "@/constants";
 import {
@@ -15,12 +14,11 @@ import {
 } from "@/lib/actions/appointment.actions";
 import { getAppointmentSchema } from "@/lib/validation";
 import { Appointment } from "@/types/appwrite.types";
-
 import "react-datepicker/dist/react-datepicker.css";
-
 import CustomFormField, { FormFieldType } from "../shared/CustomFormField";
 import SubmitButton from "../shared/SubmitButton";
 import { Form } from "../ui/form";
+
 
 export const AppointmentForm = ({
   userId,
@@ -55,7 +53,7 @@ export const AppointmentForm = ({
     },
   });
 
-  const onSubmit = async (
+  const onsubmit = async (
     values: z.infer<typeof AppointmentFormValidation>
   ) => {
     setIsLoading(true);
@@ -74,6 +72,7 @@ export const AppointmentForm = ({
 
     try {
       if (type === "create" && patientId) {
+
         const appointment = {
           userId,
           patient: patientId,
@@ -92,17 +91,17 @@ export const AppointmentForm = ({
             `/patients/${userId}/new-appointment/success?appointmentId=${newAppointment.$id}`
           );
         }
+        
       } else {
+
         const appointmentToUpdate = {
-          userId,
           appointmentId: appointment?.$id!,
           appointment: {
             primaryPhysician: values.primaryPhysician,
             schedule: new Date(values.schedule),
             status: status as Status,
             cancellationReason: values.cancellationReason,
-          },
-          type,
+          }
         };
 
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
@@ -132,7 +131,7 @@ export const AppointmentForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
+      <form onSubmit={form.handleSubmit(onsubmit)} className="flex-1 space-y-6">
         {type === "create" && (
           <section className="mb-12 space-y-4">
             <h1 className="header">New Appointment</h1>

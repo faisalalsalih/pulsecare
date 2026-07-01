@@ -60,16 +60,17 @@
     @apply relative flex-1 overflow-y-auto px-[5%];
   }
 
+
   .sub-container {
-    @apply mx-auto flex size-full flex-col py-10;
+    @apply mx-auto flex flex-col size-full py-10;
   }
 
   .side-img {
-    @apply hidden h-full object-cover md:block;
+    @apply hidden md:block h-full object-cover;
   }
 
   .copyright {
-    @apply text-14-regular justify-items-end text-center text-dark-600 xl:text-left;
+    @apply text-14-regular flex justify-end text-dark-600 ;
   }
 
   /* ==== SUCCESS */
@@ -95,7 +96,7 @@
   }
 
   /* ==== FORM */
-  .radio-group {
+  .radio-group-items {
     @apply flex h-full flex-1 items-center gap-2 rounded-md border border-dashed border-dark-500 bg-dark-400 p-3;
   }
 

@@ -1,20 +1,24 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
-
 import RegisterForm from "@/components/forms/RegisterForm";
 import { getPatient, getUser } from "@/lib/actions/patient.actions";
 
+
 const Register = async ({ params: { userId } }: SearchParamProps) => {
+
   
   const user = await getUser(userId);
+  
   const patient = await getPatient(userId);
 
   if (patient) redirect(`/patients/${userId}/new-appointment`);
 
   return (
     <div className="flex h-screen max-h-screen">
+
       <section className="remove-scrollbar container">
-        <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
+
+        <div className="sub-container max-w-[860px] flex-1">
           <Image
             src="/assets/icons/logo-full.svg"
             height={1000}
@@ -25,8 +29,9 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-          <p className="copyright py-12">© 2024 CarePluse</p>
+          <p className="copyright py-12">© 2026 CarePluse</p>
         </div>
+
       </section>
 
       <Image
@@ -36,6 +41,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
         alt="patient"
         className="side-img max-w-[390px]"
       />
+
     </div>
   );
 };

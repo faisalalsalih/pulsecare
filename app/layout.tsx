@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const fontSans = FontSans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-sans",
+  variable: "--font-sans"
 });
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     "A healthcare patient management System designed to streamline patient registration, appointment scheduling, and medical records management for healthcare providers.",
   icons: {
-    icon: "/assets/icons/logo-icon.svg",
+    icon: "/assets/icons/logo-icon.svg"
   },
 };
 
@@ -40,3 +40,4 @@ export default function RootLayout({
     </html>
   );
 }
+

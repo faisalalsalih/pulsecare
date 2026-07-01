@@ -20,8 +20,10 @@ const RequestSuccess = async ({
   );
 
   return (
-    <div className=" flex h-screen max-h-screen px-[5%]">
+    <div className="flex h-screen max-h-screen px-[5%]">
+
       <div className="success-img">
+
         <Link href="/">
           <Image
             src="/assets/icons/logo-full.svg"
@@ -76,7 +78,9 @@ const RequestSuccess = async ({
         </Button>
 
         <p className="copyright">© 2024 CarePluse</p>
+        
       </div>
+
     </div>
   );
 };

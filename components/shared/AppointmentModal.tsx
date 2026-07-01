@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
-
 import {
   Dialog,
   DialogContent,
@@ -12,12 +10,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Appointment } from "@/types/appwrite.types";
-
 import { AppointmentForm } from "../forms/AppointmentForm";
-
 import "react-datepicker/dist/react-datepicker.css";
+
+
+
 
 export const AppointmentModal = ({
   patientId,
@@ -32,6 +30,7 @@ export const AppointmentModal = ({
   title: string;
   description: string;
 }) => {
+
   const [open, setOpen] = useState(false);
 
   return (
@@ -40,7 +39,7 @@ export const AppointmentModal = ({
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className={`capitalize ${type === "schedule" && "text-green-500"}`}
+          className={`capitalize ${type === "schedule" ? "text-green-500" : "text-red-500"}`}
         >
           {type}
         </Button>

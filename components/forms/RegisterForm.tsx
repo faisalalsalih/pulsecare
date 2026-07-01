@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Form, FormControl } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -14,14 +13,16 @@ import { SelectItem } from "@/components/ui/select";
 import { Doctors, PatientFormDefaultValues, IdentificationTypes, GenderOptions } from "@/constants";
 import { registerPatient } from "@/lib/actions/patient.actions";
 import { PatientFormValidation } from "@/lib/validation";
-
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../shared/CustomFormField";
 import { FileUploader } from "../shared/FileUploader";
 import SubmitButton from "../shared/SubmitButton";
 
+
+
 const RegisterForm = ({ user }: { user: User }) => {
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,12 +37,12 @@ const RegisterForm = ({ user }: { user: User }) => {
   });
 
   const onsubmit = async (values: z.infer<typeof PatientFormValidation>) => {
-    setIsLoading(true);
 
-    console.log(values);
+    setIsLoading(true);
 
     // Store file info in form data as
     let formData;
+
     if (
       values.identificationDocument &&
       values.identificationDocument?.length > 0
@@ -87,6 +88,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       if (newPatient) {
         router.push(`/patients/${user.$id}/new-appointment`);
       }
+      
     } catch (error) {
       console.log(error);
     }
@@ -106,6 +108,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         </section>
 
         <section className="space-y-6">
+
           <div className="mb-9 space-y-1">
             <h2 className="sub-header">Personal Information</h2>
           </div>
@@ -164,7 +167,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                     defaultValue={field.value}
                   >
                     {GenderOptions.map((option, i) => (
-                      <div key={option + i} className="radio-group">
+                      <div key={option + i} className="radio-group-items">
                         <RadioGroupItem value={option} id={option} />
                         <Label htmlFor={option} className="cursor-pointer">
                           {option}
@@ -217,6 +220,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         </section>
 
         <section className="space-y-6">
+          
           <div className="mb-9 space-y-1">
             <h2 className="sub-header">Medical Information</h2>
           </div>
@@ -304,6 +308,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         </section>
 
         <section className="space-y-6">
+
           <div className="mb-9 space-y-1">
             <h2 className="sub-header">Identification and Verfication</h2>
           </div>

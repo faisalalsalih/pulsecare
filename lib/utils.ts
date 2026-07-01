@@ -5,12 +5,21 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
+export const parseStringify = (value: any) => {
+
+  if(value === undefined){
+    console.log("The Value is showing Undefined what are you doing man")
+  }
+  
+  return JSON.parse(JSON.stringify(value));
+
+}
 
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
 
 // FORMAT DATE TIME
 export const formatDateTime = (dateString: Date | string, timeZone: string = Intl.DateTimeFormat().resolvedOptions().timeZone) => {
+
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
     // weekday: "short", // abbreviated weekday name (e.g., 'Mon')
     month: "short", // abbreviated month name (e.g., 'Oct')
@@ -25,7 +34,7 @@ export const formatDateTime = (dateString: Date | string, timeZone: string = Int
   const dateDayOptions: Intl.DateTimeFormatOptions = {
     weekday: "short", // abbreviated weekday name (e.g., 'Mon')
     year: "numeric", // numeric year (e.g., '2023')
-    month: "2-digit", // abbreviated month name (e.g., 'Oct')
+    month: "short", // abbreviated month name (e.g., 'Oct')
     day: "2-digit", // numeric day of the month (e.g., '25')
     timeZone: timeZone, // use the provided timezone
   };

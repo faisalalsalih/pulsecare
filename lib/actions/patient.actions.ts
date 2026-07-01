@@ -27,6 +27,7 @@ export const createUser = async (user: CreateUserParams) => {
     );
 
     return parseStringify(newuser);
+    
   } catch (error: any) {
     // Check existing user
     if (error && error?.code === 409) {
@@ -43,9 +44,11 @@ export const createUser = async (user: CreateUserParams) => {
 // GET USER
 export const getUser = async (userId: string) => {
   try {
+    
     const user = await users.get(userId);
 
     return parseStringify(user);
+
   } catch (error) {
     console.error(
       "An error occurred while retrieving the user details:",
@@ -62,6 +65,7 @@ export const registerPatient = async ({
   try {
     // Upload file ->  // https://appwrite.io/docs/references/cloud/client-web/storage#createFile
     let file;
+    
     if (identificationDocument) {
       const inputFile =
         identificationDocument &&
@@ -88,6 +92,7 @@ export const registerPatient = async ({
     );
 
     return parseStringify(newPatient);
+
   } catch (error) {
     console.error("An error occurred while creating a new patient:", error);
   }

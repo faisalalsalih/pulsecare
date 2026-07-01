@@ -3,16 +3,14 @@
 import { revalidatePath } from "next/cache";
 import { ID, Query } from "node-appwrite";
 import { Appointment } from "@/types/appwrite.types";
-
-
 import {
   APPOINTMENT_COLLECTION_ID,
   DATABASE_ID,
   databases
 } from "../appwrite.config";
-
-
 import { formatDateTime, parseStringify } from "../utils";
+
+
 
 //  CREATE APPOINTMENT
 export const createAppointment = async (
@@ -27,7 +25,9 @@ export const createAppointment = async (
     );
 
     revalidatePath("/admin");
+
     return parseStringify(newAppointment);
+    
   } catch (error) {
     console.error("An error occurred while creating a new appointment:", error);
   }
@@ -35,32 +35,14 @@ export const createAppointment = async (
 
 //  GET RECENT APPOINTMENTS
 export const getRecentAppointmentList = async () => {
+
   try {
+
     const appointments = await databases.listDocuments(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
       [Query.orderDesc("$createdAt")]
     );
-
-    // const scheduledAppointments = (
-    //   appointments.documents as Appointment[]
-    // ).filter((appointment) => appointment.status === "scheduled");
-
-    // const pendingAppointments = (
-    //   appointments.documents as Appointment[]
-    // ).filter((appointment) => appointment.status === "pending");
-
-    // const cancelledAppointments = (
-    //   appointments.documents as Appointment[]
-    // ).filter((appointment) => appointment.status === "cancelled");
-
-    // const data = {
-    //   totalCount: appointments.total,
-    //   scheduledCount: scheduledAppointments.length,
-    //   pendingCount: pendingAppointments.length,
-    //   cancelledCount: cancelledAppointments.length,
-    //   documents: appointments.documents,
-    // };
 
     const initialCounts = {
       scheduledCount: 0,
@@ -93,6 +75,7 @@ export const getRecentAppointmentList = async () => {
     };
 
     return parseStringify(data);
+
   } catch (error) {
     console.error(
       "An error occurred while retrieving the recent appointments:",
@@ -106,10 +89,7 @@ export const getRecentAppointmentList = async () => {
 //  UPDATE APPOINTMENT
 export const updateAppointment = async ({
   appointmentId,
-  userId,
-  timeZone,
-  appointment,
-  type,
+  appointment
 }: UpdateAppointmentParams) => {
   try {
     // Update appointment to scheduled -> https://appwrite.io/docs/references/cloud/server-nodejs/databases#updateDocument
@@ -123,7 +103,9 @@ export const updateAppointment = async ({
     if (!updatedAppointment) throw Error;
 
     revalidatePath("/admin");
+    
     return parseStringify(updatedAppointment);
+
   } catch (error) {
     console.error("An error occurred while scheduling an appointment:", error);
   }

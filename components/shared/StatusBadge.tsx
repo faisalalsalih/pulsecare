@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import Image from "next/image";
-
 import { StatusIcon } from "@/constants";
+
+
 
 export const StatusBadge = ({ status }: { status: Status }) => {
   return (
@@ -23,7 +24,7 @@ export const StatusBadge = ({ status }: { status: Status }) => {
         className={clsx("text-12-semibold capitalize", {
           "text-green-500": status === "scheduled",
           "text-blue-500": status === "pending",
-          "text-red-500": status === "cancelled",
+          "text-red-500": status === "cancelled"
         })}
       >
         {status}
