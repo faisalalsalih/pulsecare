@@ -47,7 +47,7 @@ It streamlines patient registration, appointment scheduling, and medical record 
 ![Authentication](public/assets/screenshots/auth.png)
 
 ### 5. Real-Time Notifications UI
-![Notifications](public/assets/screenshots/notifications.png)
+![Notifications](public/assets/screenshots/success.png)
 
 
 ## 🚀 Getting Started
